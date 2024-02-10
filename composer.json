@@ -1,0 +1,18 @@
+{
+    "name": "alexkuusk/malli",
+    "description": "Slim PHP template parser",
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alexkuusk\\Malli\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Kuusk",
+            "email": "malli@kuusk.eu"
+        }
+    ]
+}
