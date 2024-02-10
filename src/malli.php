@@ -1,13 +1,8 @@
 <?php
-//NB!   preg_replace e-modifier ei saa hakkama suurema templiga kui 100k, vt ini_get('pcre.backtrack_limit')  ini_set('pcre.backtrack_limit', 100000);
-// http://www.php.net/manual/en/pcre.configuration.php#ini.pcre.backtrack-limit
 
 declare(strict_types=1); 
 
 namespace alexkuusk\malli;
-
-//use malliException;
-//use alexkuusk\malli\malli\malliExecption as malliException;
 
 class malli
 {
@@ -20,15 +15,14 @@ class malli
     //TODO: extension '.tpl'
 
     public function __construct(?array $params = null, ?malli $parent = null)
-    {//echo '<pre>';print_r([$params, $parent]);
+    {
         if (is_array($params) && (isset($params['_params']))) {
             $this->setParams($params['_params'] ?? null, $params['_data'] ?? null, $parent);
-            //print_r(['here', $parent]);
         }
     }
 
     public function setParams(?array $params = null, ?array $data = null, ?malli $parent = null): void
-    {//print_r(['here', $parent]);
+    {
         if (isset($params['file'])) {
             $this->setFile($params['file']);
         } elseif (isset($parent)) {
@@ -36,7 +30,7 @@ class malli
         }
         if (isset($params['path'])) {
             $this->setPath($params['path']);
-        } elseif (isset($parent)) {//print_r(['here']);
+        } elseif (isset($parent)) {
             $this->setPath($parent->getPath());
         }
         if (isset($params['language'])) {
@@ -53,11 +47,10 @@ class malli
     }
  
     static function createSubs(array $data, $parent) {
-        foreach ($data as $key => $subParams) {//todo:rekursiivselt kõik andmed läbi käia, mitte ainult esimene tase
+        foreach ($data as $key => $subParams) {
             if (is_array($subParams)) {
                 if (isset($subParams['_params']) || isset($subParams['_data'])) {
                     $data[$key] = (string)(new malli($subParams, $parent));
-                //print_r([$key]);
                 } else {
                     $data[$key] = malli::createSubs($subParams, $parent);
                 }
@@ -169,9 +162,9 @@ class malli
         $fn = $this->getCompiledPath();
         if (($res = @file_put_contents($fn, $code, LOCK_EX)) === false) {
             if (!is_dir($this->dirname($fn))) {
-                $this->mkdir($this->dirname($fn)); //ilmselt kaust puudu, tekitame
+                $this->mkdir($this->dirname($fn)); //path probably missing, just create it
             }
-            //proovime uuesti
+            //try again
             $res = @file_put_contents($fn, $code, LOCK_EX);
         } 
         if (!$res) {
@@ -221,8 +214,7 @@ class malli
         $dir = dirname($path);
         $dir = str_replace("\\", '/', $dir);
 
-        if ($dir === '/')
-        {
+        if ($dir === '/') {
             return '';
         }
         return $dir;
