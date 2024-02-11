@@ -1,0 +1,5 @@
+{
+    "require": {
+        "alexkuusk/malli": "dev-main"
+    }
+}
