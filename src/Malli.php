@@ -8,6 +8,7 @@ class Malli
 {
     private string $path = './';
     private string $file;
+    private string $block;
     private ?string $language = '';
     private ?string $code;
     private array $data = [];

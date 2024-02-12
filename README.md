@@ -2,10 +2,10 @@ Light Template Engine
 =====
 
 A simple and lightweight PHP templating engine using few custom tags that all are translated into pure PHP.
-PHP is also allowed inside templates, just be aware of the scopes. Template blocks are compiled into PHP functions and functons are called and their output captured.
+PHP is also allowed inside templates, just be aware of the scopes. Template blocks are compiled into PHP functions and functions are called and their output captured.
 
 Possibility to add custom tags, for example translation code. That code's output can be turned into static and saved along with PHP code, so that heavy translating functions are not called every page load.
-Supports multilanguage.
+Supports multilanguage and multisite, just pass language parameter and use dynamic path with another set of templates ('path' => '../tpl/' . $_SERVER['SERVER_NAME'] . '/').
 
 Blocks can be nested inside blocks.
 
@@ -34,22 +34,21 @@ echo (new Malli([
     '_data' => [
         'title' => 'Template test',
         'books' => [
-            'One', 
+            'One',
             'two',
         ]
     ]));
 ```
 
-You can also pass in an extension that will be appended to all template paths in Environment.
-
+index.tpl
 ```tpl
 {{ BLOCK:index }}
 <html>
 <head>
     <title>{{ $title }}</title>
-</head> 
+</head>
 <body>
-<table border=1> 
+<table border=1>
 {{ FOREACH $books as $k => $title }}
     <tr>
         <td>{{ $k + 1 }}</td>
