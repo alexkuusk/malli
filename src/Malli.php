@@ -206,7 +206,7 @@ class Malli
         $code = preg_replace('/\{\{ FOR (.+) \}\}/Ums', '<' . '?php for (\1) { ?' . '>', $code);
         $code = preg_replace('/\{\{ IF (.+) \}\}/Ums', '<' . '?php if (\1) { ?' . '>', $code);
         $code = str_replace('{{ ELSE }}', '<' . '?php } else { ?' . '>', $code);
-        $code = preg_replace('/\{\{ ELSEIF (.+) \}\}/Ums', '<' . '?php } elseif { ?' . '>', $code);
+        $code = preg_replace('/\{\{ ELSEIF (.+) \}\}/Ums', '<' . '?php } elseif (\1) { ?' . '>', $code);
 
         //everything else is plain echo
         //todo: optional escaping with flags
